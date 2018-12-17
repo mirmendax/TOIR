@@ -1,0 +1,11 @@
+#prefix : <http://localhost/> 
+##prefix o: <http://localhost/oborudovanie#> 
+prefix prop: <http://localhost/property#> 
+#prefix color: <http://localhost/color#> 
+prefix manufactory: <http://localhost/manufacture#> 
+prefix type: <http://localhost/type#>
+
+SELECT  ?c WHERE 
+{ ?k prop:type ?s .
+  ?k prop:title ?c
+}
