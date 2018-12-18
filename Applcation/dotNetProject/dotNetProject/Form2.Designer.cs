@@ -64,10 +64,13 @@
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.button12 = new System.Windows.Forms.Button();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
@@ -81,11 +84,11 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(676, 0);
+            this.textBox2.Location = new System.Drawing.Point(589, 0);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox2.Size = new System.Drawing.Size(571, 159);
+            this.textBox2.Size = new System.Drawing.Size(658, 159);
             this.textBox2.TabIndex = 0;
             // 
             // button1
@@ -410,20 +413,40 @@
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(742, 245);
+            this.button12.Location = new System.Drawing.Point(353, 128);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(75, 23);
             this.button12.TabIndex = 30;
-            this.button12.Text = "button12";
+            this.button12.Text = "Запрос";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
+            // textBox11
+            // 
+            this.textBox11.Location = new System.Drawing.Point(6, 13);
+            this.textBox11.Multiline = true;
+            this.textBox11.Name = "textBox11";
+            this.textBox11.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox11.Size = new System.Drawing.Size(422, 108);
+            this.textBox11.TabIndex = 31;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.textBox11);
+            this.groupBox5.Controls.Add(this.button12);
+            this.groupBox5.Location = new System.Drawing.Point(725, 345);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(434, 157);
+            this.groupBox5.TabIndex = 33;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Текст запроса";
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1259, 547);
-            this.Controls.Add(this.button12);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -442,6 +465,8 @@
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -485,5 +510,7 @@
         private System.Windows.Forms.TextBox textBox10;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.GroupBox groupBox5;
     }
 }

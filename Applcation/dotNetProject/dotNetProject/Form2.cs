@@ -404,9 +404,26 @@ namespace dotNetProject
 
         private void button12_Click(object sender, EventArgs e)
         {
+            string text = string.Empty;
+            string[] s = textBox11.Lines;
+            foreach (var item in s)
+            {
+                text += item;
+            }
             List<Dictionary<string, object>> rr = new List<Dictionary<string, object>>();
-            rr = Predicat.GetQuery("SELECT ?start ?select ?where WHERE { ?s ?select ?where }");
-            //MessageBox.Show(((IUriNode)rr[0]["start "]).Uri.AbsolutePath); 
+            rr = Predicat.GetQuery(text);
+            List<string> r = new List<string>();
+            foreach (var item in rr)
+            {
+                string str = string.Empty;
+                foreach (var dic in item)
+                {
+                    if (dic.Value != null)
+                        str += string.Format("{0}={1}\t", dic.Key, dic.Value.ToString());
+                }
+                r.Add(str);
+            }
+            textBox2.Lines = r.ToArray();
         }
     }
 }

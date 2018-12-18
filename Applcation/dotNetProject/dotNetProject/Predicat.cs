@@ -130,7 +130,7 @@ namespace dotNetProject
             int whe = query.IndexOf("WHERE");
             int b = sel + ("SELECT").Length;
             string v = query.Substring(b + 1, whe - b - 1);
-            
+            v = v.Replace(" ", "");
             variable = v.Split(new Char[] { '?' }, StringSplitOptions.RemoveEmptyEntries);//Список переменных
             
             SparqlParameterizedString sql = Prefix();
@@ -152,24 +152,33 @@ namespace dotNetProject
                         INode n;
                         if (item.TryGetValue(variable[i], out n))
                         {
-                            switch (n.NodeType)
+                            if (n !=null)
+                                switch (n.NodeType)
+                                {
+                                    case NodeType.Blank:
+                                        oo.Add(variable[i], ((IBlankNode)n));
+                                        //oo.Key ((IBlankNode)n).InternalID;
+                                        break;
+                                    case NodeType.GraphLiteral:
+                                        oo.Add(variable[i], ((ILiteralNode)n));
+                                        break;
+                                    case NodeType.Literal:
+                                        oo.Add(variable[i], ((ILiteralNode)n));
+                                        break;
+                                    case NodeType.Uri:
+                                        oo.Add(variable[i], ((IUriNode)n));
+                                        break;
+                                    case NodeType.Variable:
+                                        oo.Add(variable[i], ((ITripleStore)n));
+                                        break;
+
+                                    default:
+                                        oo.Add(variable[i], null);
+                                        break;
+                                }
+                            else
                             {
-                                case NodeType.Blank:
-                                    oo.Add(variable[i], ((IBlankNode)n));
-                                    //oo.Key ((IBlankNode)n).InternalID;
-                                    break;
-                                case NodeType.GraphLiteral:
-                                    oo.Add(variable[i], ((ILiteralNode)n));
-                                    break;
-                                case NodeType.Literal:
-                                    oo.Add(variable[i], ((ILiteralNode)n));
-                                    break;
-                                case NodeType.Uri:
-                                    oo.Add(variable[i], ((IUriNode)n));
-                                    break;
-                                default:
-                                    oo.Add(variable[i], null);
-                                    break;
+                                oo.Add(variable[i], null);
                             }
                         }
                     }
