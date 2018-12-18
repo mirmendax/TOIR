@@ -14,9 +14,9 @@ namespace dotNetProject
             StringBuilder ret = new StringBuilder();
             s = s.ToUpper();
             string[] rus = { "А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц",   
-                                "Ч", "Ш", "Щ", "Ъ", "Ы", "Ь", "Э", "Ю", "Я", " ", "1" , "2", "3", "4", "5", "6", "7", "8", "9", "0"};
+                                "Ч", "Ш", "Щ", "Ъ", "Ы", "Ь", "Э", "Ю", "Я", " ", "1" , "2", "3", "4", "5", "6", "7", "8", "9", "0", ".", "-", "(" , ")"};
             string[] eng = { "A", "B", "V", "G", "D", "E", "E", "ZH", "Z", "I", "Y", "K", "L", "M", "N", "O", "P", "R", "S", "T", "U", "F", "KH", "TS",   
-                                "CH", "SH", "SHCH", null, "Y", null, "E", "YU", "YA" , "_", "1" , "2", "3", "4", "5", "6", "7", "8", "9", "0"};
+                                "CH", "SH", "SHCH", null, "Y", null, "E", "YU", "YA" , "_", "1" , "2", "3", "4", "5", "6", "7", "8", "9", "0", ".", "-", "(", ")"};
 
             for (int j = 0; j < s.Length; j++)
                 for (int i = 0; i < rus.Length; i++)
@@ -25,7 +25,7 @@ namespace dotNetProject
         }
 
 
-        public static string NAmetoUTF(string str)
+        public static string Translate(string str)
         {
             return Tr2(str);
         }

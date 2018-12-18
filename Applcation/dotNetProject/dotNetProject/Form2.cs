@@ -34,7 +34,7 @@ namespace dotNetProject
 //
             SparqlQueryParser sqlp = new SparqlQueryParser();
             SparqlQuery sparql = sqlp.ParseFromString(sql);
-            SparqlRemoteEndpoint Send = new SparqlRemoteEndpoint(new Uri("http://192.168.0.87:3030/newdate/query"));
+            SparqlRemoteEndpoint Send = new SparqlRemoteEndpoint(Predicat.URI_End_Point_QUERY);
             SparqlResultSet result = Send.QueryWithResultSet(sparql.ToString());
             List<string> rr = new List<string>();
             foreach (var item in result)
@@ -158,7 +158,7 @@ namespace dotNetProject
         private void button2_Click(object sender, EventArgs e)
         {
             SparqlParameterizedString sql = Predicat.Prefix();
-            string name = Tools.NAmetoUTF(textBox3.Text);
+            string name = Tools.Translate(textBox3.Text);
             sql.CommandText = @"INSERT DATA { o:" + name + " prop:type type:o; prop:title '" + textBox3.Text + "' ";
             if (label9.Text == "OK!")
                 sql.CommandText += @"; prop:color <" + Predicat.GetColorUri(textBox5.Text) + ">";
@@ -215,7 +215,7 @@ namespace dotNetProject
         private void button3_Click(object sender, EventArgs e)
         {
             SparqlParameterizedString sql = Predicat.Prefix();
-            string name = Tools.NAmetoUTF(textBox8.Text);
+            string name = Tools.Translate(textBox8.Text);
             sql.CommandText = @"INSERT DATA { manufactory:" + name + " prop:type type:manufactory ; prop:title '"+textBox8.Text+"'}";
             //sql.CommandText += " prop:title '"+textBox8.Text+"' }";
             //textBox2.Text = @"INSERT DATA { <" + Predicat._Host + "manufactory#" + name + "> <" + Predicat._Host + "prop#type> <" + Predicat._Host + "type#manufactory> }";
@@ -233,7 +233,7 @@ namespace dotNetProject
         private void button5_Click_1(object sender, EventArgs e)
         {
             SparqlParameterizedString sql = Predicat.Prefix();
-            string name = Tools.NAmetoUTF(textBox9.Text);
+            string name = Tools.Translate(textBox9.Text);
             sql.CommandText = @"INSERT DATA { color:" + name + " prop:type type:color ; prop:title '" + textBox9.Text + "'}";
             //sql.CommandText += " prop:title '"+textBox8.Text+"' }";
             FusekiConnector conn = new FusekiConnector(Predicat._FUSEKI);
@@ -361,6 +361,52 @@ namespace dotNetProject
                 label10.Text = "OK!";
             }
             else label10.Text = "null";
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            string[] variable = new string[] { "title", "color", "place", "control" };
+            SparqlParameterizedString sql = Predicat.Prefix();
+            sql.CommandText = "SELECT ?title ?color ?place ?control WHERE { ?f prop:type type:o . ?f prop:title ?title FILTER regex('?title', '"+textBox10.Text+"', 'i') . ?f prop:color ?l ; ?l prop:title ?color ";
+            sql.CommandText += " . ?f prop:place ?d . ?d prop:title ?place OPTIONAL {?f prop:control ?g . ?g prop:title ?control } }";
+            SparqlQueryParser parse = new SparqlQueryParser();
+            SparqlQuery query = parse.ParseFromString(sql);
+
+            SparqlRemoteEndpoint ep = new SparqlRemoteEndpoint(Predicat.URI_End_Point_QUERY);
+            SparqlResultSet result = ep.QueryWithResultSet(query.ToString());
+
+            foreach (var item in result)
+            {
+                INode n;
+                if (item.TryGetValue("a", out n))
+                {
+                    if (n != null)
+                    {
+                        switch (n.NodeType)
+                        {
+                            case NodeType.Blank:
+                                break;
+                            case NodeType.GraphLiteral:
+                                break;
+                            case NodeType.Literal:
+                                break;
+                            case NodeType.Uri:
+                                break;
+                            case NodeType.Variable:
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            List<Dictionary<string, object>> rr = new List<Dictionary<string, object>>();
+            rr = Predicat.GetQuery("SELECT ?start ?select ?where WHERE { ?s ?select ?where }");
+            //MessageBox.Show(((IUriNode)rr[0]["start "]).Uri.AbsolutePath); 
         }
     }
 }

@@ -43,7 +43,7 @@ namespace dotNetProject
         {
 
 
-            IUriNode name = graph.CreateUriNode(UriFactory.Create("http://localhost/" + Tools.NAmetoUTF(textBox2.Text)));
+            IUriNode name = graph.CreateUriNode(UriFactory.Create("http://localhost/" + Tools.Translate(textBox2.Text)));
             
             graph.Assert(new Triple(name, graph.CreateUriNode(Predicat.Name), graph.CreateLiteralNode(textBox2.Text)));
             if (textBox3.Text != "")
@@ -55,7 +55,7 @@ namespace dotNetProject
             {
                 IGraph g = new Graph();
                 
-                IUriNode b =  graph.GetUriNode("g:" + Tools.NAmetoUTF(textBox5.Text));
+                IUriNode b =  graph.GetUriNode("g:" + Tools.Translate(textBox5.Text));
                 textBox6.Text = b.ToString();
                 /*
                 IUriNode mother = g.CreateUriNode(UriFactory.Create("http://localhost/" + Tools.NAmetoUTF(textBox5.Text)));

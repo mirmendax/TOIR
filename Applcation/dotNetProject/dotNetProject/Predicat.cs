@@ -119,5 +119,66 @@ namespace dotNetProject
             }
             return res;
         }
+
+        public static List<Dictionary<string, object>> GetQuery(string query)
+        {
+            List<Dictionary<string, object>> ret = new List<Dictionary<string, object>>();
+
+            string[] variable = new string[] { };
+
+            int sel = query.IndexOf("SELECT");
+            int whe = query.IndexOf("WHERE");
+            int b = sel + ("SELECT").Length;
+            string v = query.Substring(b + 1, whe - b - 1);
+            
+            variable = v.Split(new Char[] { '?' }, StringSplitOptions.RemoveEmptyEntries);//Список переменных
+            
+            SparqlParameterizedString sql = Prefix();
+            sql.CommandText = query;
+
+            SparqlQueryParser parse = new SparqlQueryParser();
+            SparqlQuery q = parse.ParseFromString(sql);
+
+            SparqlRemoteEndpoint ep = new SparqlRemoteEndpoint(URI_End_Point_QUERY);
+            SparqlResultSet result = ep.QueryWithResultSet(q.ToString());
+
+            if (result.Count != 0)
+            {
+                foreach (var item in result)
+                {
+                    Dictionary<string, object> oo = new Dictionary<string, object>();
+                    for (int i = 0; i < variable.Length; i++)
+                    {
+                        INode n;
+                        if (item.TryGetValue(variable[i], out n))
+                        {
+                            switch (n.NodeType)
+                            {
+                                case NodeType.Blank:
+                                    oo.Add(variable[i], ((IBlankNode)n));
+                                    //oo.Key ((IBlankNode)n).InternalID;
+                                    break;
+                                case NodeType.GraphLiteral:
+                                    oo.Add(variable[i], ((ILiteralNode)n));
+                                    break;
+                                case NodeType.Literal:
+                                    oo.Add(variable[i], ((ILiteralNode)n));
+                                    break;
+                                case NodeType.Uri:
+                                    oo.Add(variable[i], ((IUriNode)n));
+                                    break;
+                                default:
+                                    oo.Add(variable[i], null);
+                                    break;
+                            }
+                        }
+                    }
+                    ret.Add(oo);
+                }
+            }
+
+            return ret;
+        }
+
     }
 }
