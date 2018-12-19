@@ -120,7 +120,7 @@ namespace dotNetProject
             return res;
         }
 
-        public static List<Dictionary<string, object>> GetQuery(string query)
+        public static List<Dictionary<string, object>> SQuery(string query)
         {
             List<Dictionary<string, object>> ret = new List<Dictionary<string, object>>();
 
@@ -188,6 +188,8 @@ namespace dotNetProject
 
             return ret;
         }
+
+        
 
     }
 }

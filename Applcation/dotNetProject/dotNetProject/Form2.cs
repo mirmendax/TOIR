@@ -166,8 +166,7 @@ namespace dotNetProject
                 sql.CommandText += @"; prop:place <" + Predicat.GetManufactoryUri(textBox4.Text)+">";
             if (label10.Text == "OK!")
                 sql.CommandText += @"; prop:control <"+Predicat.GetOUri(textBox6.Text)+">";
-            if (textBox7.Text != "")
-                sql.CommandText += @"; prop:size '"+textBox7.Text+"'";
+            
 
             sql.CommandText += " } ";
             //sql.CommandText += " prop:title '"+textBox8.Text+"' }";
@@ -365,41 +364,38 @@ namespace dotNetProject
 
         private void button11_Click(object sender, EventArgs e)
         {
-            string[] variable = new string[] { "title", "color", "place", "control" };
-            SparqlParameterizedString sql = Predicat.Prefix();
-            sql.CommandText = "SELECT ?title ?color ?place ?control WHERE { ?f prop:type type:o . ?f prop:title ?title FILTER regex('?title', '"+textBox10.Text+"', 'i') . ?f prop:color ?l ; ?l prop:title ?color ";
-            sql.CommandText += " . ?f prop:place ?d . ?d prop:title ?place OPTIONAL {?f prop:control ?g . ?g prop:title ?control } }";
-            SparqlQueryParser parse = new SparqlQueryParser();
-            SparqlQuery query = parse.ParseFromString(sql);
+            
+            List<Dictionary<string, object>> result = Predicat.SQuery("SELECT ?title ?f ?color ?place ?control ?size WHERE { ?f prop:type type:o . ?f prop:title ?title FILTER regex(?title, '" + textBox10.Text + "', 'i') . ?f prop:color ?l . ?l prop:title ?color  . ?f prop:place ?d . ?d prop:title ?place OPTIONAL {?f prop:control ?g . ?g prop:title ?control } OPTIONAL { ?f prop:size ?size } }");
 
-            SparqlRemoteEndpoint ep = new SparqlRemoteEndpoint(Predicat.URI_End_Point_QUERY);
-            SparqlResultSet result = ep.QueryWithResultSet(query.ToString());
-
-            foreach (var item in result)
+            if (result.Count != 0)
             {
-                INode n;
-                if (item.TryGetValue("a", out n))
+                if (result.Count < 2)
                 {
-                    if (n != null)
+                    foreach (var item in result[0])
                     {
-                        switch (n.NodeType)
-                        {
-                            case NodeType.Blank:
-                                break;
-                            case NodeType.GraphLiteral:
-                                break;
-                            case NodeType.Literal:
-                                break;
-                            case NodeType.Uri:
-                                break;
-                            case NodeType.Variable:
-                                break;
-                            default:
-                                break;
-                        }
+                        if ((item.Key == "title") && (item.Value != null)) textBox3.Text = item.Value.ToString();
+                        if ((item.Key == "place") && (item.Value != null)) textBox4.Text = item.Value.ToString();
+                        if ((item.Key == "color") && (item.Value != null)) textBox5.Text = item.Value.ToString();
+                        if ((item.Key == "control") && (item.Value != null)) textBox6.Text = item.Value.ToString();
+                        
                     }
                 }
+                else
+                {
+                    List<string> str = new List<string>();
+                    foreach (var item in result)
+                    {
+                        foreach (var dic in item)
+                        {
+                            if ((dic.Key == "title") && (dic.Value != null)) str.Add(dic.Value.ToString());
+                            if ((dic.Key == "f") && (dic.Value != null)) str.Add(dic.Value.ToString());
+                        }
+                    }
+                    textBox2.Lines = str.ToArray();
+                }
             }
+
+           
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -411,13 +407,14 @@ namespace dotNetProject
                 text += item;
             }
             List<Dictionary<string, object>> rr = new List<Dictionary<string, object>>();
-            rr = Predicat.GetQuery(text);
+            rr = Predicat.SQuery(text);
             List<string> r = new List<string>();
             foreach (var item in rr)
             {
                 string str = string.Empty;
                 foreach (var dic in item)
                 {
+                    
                     if (dic.Value != null)
                         str += string.Format("{0}={1}\t", dic.Key, dic.Value.ToString());
                 }
