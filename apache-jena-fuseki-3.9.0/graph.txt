@@ -1,0 +1,203 @@
+@prefix :      <http://localhost/> .
+@prefix color: <http://localhost/color#> .
+@prefix prop:  <http://localhost/property#> .
+@prefix type:  <http://localhost/type#> .
+@prefix manufactory: <http://localhost/manufactory#> .
+@prefix o:     <http://localhost/oborudovanie#> .
+
+manufactory:novyy  prop:title  "Новый" ;
+        prop:type   type:manufactory .
+
+manufactory:pervichnogo_proizvodstva
+        prop:title  "Первичного производства" ;
+        prop:type   type:manufactory .
+
+manufactory:elektropitaniya
+        prop:title  "Электропитания" ;
+        prop:type   type:manufactory .
+
+manufactory:sklad  prop:title  "Склад" ;
+        prop:type   type:manufactory .
+
+manufactory:mekhanicheskiy
+        prop:title  "Механический" ;
+        prop:type   type:manufactory .
+
+o:rp_0_4_kv  prop:color  color:siniy ;
+        prop:place  manufactory:elektropitaniya ;
+        prop:title  "РП 0.4 кВ" ;
+        prop:type   type:o .
+
+o:shr1  prop:color    color:siniy ;
+        prop:place    manufactory:elektropitaniya ;
+        prop:powered  o:rp_0_4_kv ;
+        prop:title    "ШР1" ;
+        prop:type     type:o .
+
+o:shr2  prop:color    color:siniy ;
+        prop:place    manufactory:elektropitaniya ;
+        prop:powered  o:rp_0_4_kv ;
+        prop:title    "ШР2" ;
+        prop:type     type:o .
+
+o:shcho  prop:color   color:belyy ;
+        prop:place    manufactory:elektropitaniya ;
+        prop:powered  o:rp_0_4_kv ;
+        prop:title    "ЩО" ;
+        prop:type     type:o .
+
+o:pr1   prop:color    color:siniy ;
+        prop:place    manufactory:pervichnogo_proizvodstva ;
+        prop:powered  o:shr2 ;
+        prop:title    "ПР1" ;
+        prop:type     type:o .
+
+o:shuna1  prop:color  color:belyy ;
+        prop:control  o:nososnyy_agregat_1 ;
+        prop:place    manufactory:pervichnogo_proizvodstva ;
+        prop:powered  o:pr1 ;
+        prop:title    "ШУНА1" ;
+        prop:type     type:o .
+
+o:shknu3  prop:color  color:belyy ;
+        prop:control  o:kontroller_nizhnego_urovnya ;
+        prop:place    manufactory:pervichnogo_proizvodstva ;
+        prop:powered  o:pr1 ;
+        prop:title    "ШКНУ3" ;
+        prop:type     type:o .
+
+color:zheltyy  prop:title  "Желтый" ;
+        prop:type   type:color .
+
+o:shmn1  prop:color   color:siniy ;
+        prop:place    manufactory:mekhanicheskiy ;
+        prop:powered  o:pr1 ;
+        prop:title    "ШМН1" ;
+        prop:type     type:o .
+
+o:shumn1  prop:color  color:belyy ;
+        prop:control  o:maslo_nasos_1 , o:maslo_nasos_1-1 ;
+        prop:place    manufactory:mekhanicheskiy ;
+        prop:powered  o:shmn1 ;
+        prop:title    "ШУМН1" ;
+        prop:type     type:o .
+
+o:shumn2  prop:color  color:belyy ;
+        prop:control  o:maslo_nasos_2 ;
+        prop:place    manufactory:mekhanicheskiy ;
+        prop:powered  o:shmn1 ;
+        prop:title    "ШУМН2" ;
+        prop:type     type:o .
+
+o:pr2   prop:color    color:siniy ;
+        prop:place    manufactory:mekhanicheskiy ;
+        prop:powered  o:shr2 ;
+        prop:title    "ПР2" ;
+        prop:type     type:o .
+
+o:shuna2  prop:color  color:belyy ;
+        prop:control  o:nososnyy_agregat_2 ;
+        prop:place    manufactory:mekhanicheskiy ;
+        prop:powered  o:pr2 ;
+        prop:title    "ШУНА2" ;
+        prop:type     type:o .
+
+o:vorota_1  prop:color  color:siniy ;
+        prop:place  manufactory:novyy ;
+        prop:title  "Ворота 1" ;
+        prop:type   type:o .
+
+o:shuv  prop:color    color:siniy ;
+        prop:control  o:vorota_1 ;
+        prop:place    manufactory:novyy ;
+        prop:powered  o:shr1 ;
+        prop:title    "ШУВ" ;
+        prop:type     type:o .
+
+o:shumn3  prop:color  color:belyy ;
+        prop:control  o:maslo_nasos_3 ;
+        prop:place    manufactory:mekhanicheskiy ;
+        prop:powered  o:shmn1 ;
+        prop:title    "ШУМН3" ;
+        prop:type     type:o .
+
+o:ventilyator_1  prop:color  color:chernyy ;
+        prop:place  manufactory:mekhanicheskiy ;
+        prop:title  "Вентилятор 1" ;
+        prop:type   type:o .
+
+o:shchs  prop:color   color:siniy ;
+        prop:place    manufactory:mekhanicheskiy ;
+        prop:powered  o:pr1 ;
+        prop:title    "ЩС" ;
+        prop:type     type:o .
+
+o:shcho3  prop:color  color:chernyy ;
+        prop:place    manufactory:mekhanicheskiy ;
+        prop:powered  o:shchs ;
+        prop:title    "ЩО3" ;
+        prop:type     type:o .
+
+o:shrp32  prop:color  color:siniy ;
+        prop:place    manufactory:mekhanicheskiy ;
+        prop:powered  o:shchs ;
+        prop:title    "ШРП32" ;
+        prop:type     type:o .
+
+o:shbp  prop:color    color:chernyy ;
+        prop:place    manufactory:mekhanicheskiy ;
+        prop:powered  o:shrp32 ;
+        prop:title    "ШБП" ;
+        prop:type     type:o .
+
+color:belyy  prop:title  "Белый" ;
+        prop:type   type:color .
+
+color:siniy  prop:title  "Синий" ;
+        prop:type   type:color .
+
+color:chernyy  prop:title  "Черный" ;
+        prop:type   type:color .
+
+o:nososnyy_agregat_1  prop:color  color:chernyy ;
+        prop:place  manufactory:pervichnogo_proizvodstva ;
+        prop:title  "Нососный агрегат 1" ;
+        prop:type   type:o .
+
+o:nososnyy_agregat_2  prop:color  color:chernyy ;
+        prop:place  manufactory:mekhanicheskiy ;
+        prop:title  "Нососный агрегат 2" ;
+        prop:type   type:o .
+
+o:kontroller_nizhnego_urovnya
+        prop:color  color:belyy ;
+        prop:place  manufactory:pervichnogo_proizvodstva ;
+        prop:title  "Контроллер Нижнего Уровня" ;
+        prop:type   type:o .
+
+o:maslo_nasos_1  prop:color  color:zheltyy ;
+        prop:place  manufactory:mekhanicheskiy ;
+        prop:title  "Маслонасос 1" ;
+        prop:type   type:o .
+
+o:maslo_nasos_1-1  prop:color  color:zheltyy ;
+        prop:place  manufactory:mekhanicheskiy ;
+        prop:title  "Маслонасос 1-1" ;
+        prop:type   type:o .
+
+o:maslo_nasos_2  prop:color  color:zheltyy ;
+        prop:place  manufactory:mekhanicheskiy ;
+        prop:title  "Маслонасос 2" ;
+        prop:type   type:o .
+
+o:maslo_nasos_3  prop:color  color:zheltyy ;
+        prop:place  manufactory:mekhanicheskiy ;
+        prop:title  "Маслонасос 3" ;
+        prop:type   type:o .
+
+o:shv   prop:color    color:belyy ;
+        prop:control  o:ventilyator_1 ;
+        prop:place    manufactory:mekhanicheskiy ;
+        prop:powered  o:shrp32 ;
+        prop:title    "ШВ" ;
+        prop:type     type:o .

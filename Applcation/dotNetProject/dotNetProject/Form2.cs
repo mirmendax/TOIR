@@ -380,7 +380,7 @@ namespace dotNetProject
                         if ((item.Key == "place") && (item.Value != null)) textBox4.Text = item.Value.ToString();
                         if ((item.Key == "color") && (item.Value != null)) textBox5.Text = item.Value.ToString();
                         if ((item.Key == "control") && (item.Value != null)) textBox6.Text = item.Value.ToString();
-                        if ((item.Key == "powered") && (item.Value != null)) textBox6.Text = item.Value.ToString();
+                        if ((item.Key == "powered") && (item.Value != null)) textBox12.Text = item.Value.ToString();
                         
                     }
                 }
