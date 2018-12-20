@@ -1,0 +1,24 @@
+
+#prefix :      <http://localhost/> 
+prefix color: <http://localhost/color#> 
+prefix prop:  <http://localhost/property#> 
+prefix type:  <http://localhost/type#>
+prefix manufactory: <http://localhost/manufactory#> 
+prefix o:     <http://localhost/oborudovanie#> 
+
+SELECT ?title ?yy ?tt WHERE { 
+  #?y prop:type type:manufactory . 
+   # ?y prop:title "—ÍÎ‡‰". 
+ 
+ ?a prop:title "ÿ–2" .
+  ?b prop:powered+ ?a .
+  ?b prop:title ?tt .
+  ?b prop:powered ?t .
+  ?t prop:title ?title .
+  ?t prop:place ?rr .
+  ?rr prop:title ?yy .
+ #?b prop:place ?y
+  
+  
+} 
+ORDER BY ?title

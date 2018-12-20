@@ -131,7 +131,7 @@ namespace dotNetProject
             int b = sel + ("SELECT").Length;
             string v = query.Substring(b + 1, whe - b - 1);
             v = v.Replace(" ", "");
-            variable = v.Split(new Char[] { '?' }, StringSplitOptions.RemoveEmptyEntries);//Список переменных
+            variable = v.Split(new Char[] { '?' }, StringSplitOptions.RemoveEmptyEntries); //Список переменных
             
             SparqlParameterizedString sql = Prefix();
             sql.CommandText = query;
@@ -189,7 +189,19 @@ namespace dotNetProject
             return ret;
         }
 
-        
+        public static bool SAsk(string query)
+        {
+
+            SparqlParameterizedString sql = Predicat.Prefix();
+            sql.CommandText = query;
+            SparqlQueryParser q= new SparqlQueryParser();
+            SparqlQuery sparql = q.ParseFromString(sql);
+
+            SparqlRemoteEndpoint ep = new SparqlRemoteEndpoint(Predicat.URI_End_Point_QUERY);
+            SparqlResultSet result = ep.QueryWithResultSet(sparql.ToString());
+
+            return result.Result;
+        }
 
     }
 }

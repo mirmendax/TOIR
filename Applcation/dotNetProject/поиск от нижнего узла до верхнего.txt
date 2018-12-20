@@ -1,0 +1,17 @@
+
+#prefix :      <http://localhost/> 
+prefix color: <http://localhost/color#> 
+prefix prop:  <http://localhost/property#> 
+prefix type:  <http://localhost/type#>
+prefix manufactory: <http://localhost/manufactory#> 
+prefix o:     <http://localhost/oborudovanie#> 
+
+SELECT ?title ?cc ?tt WHERE { 
+  ?b prop:type type:o .
+  ?b prop:title ?title FILTER (?title = "ьслм1") .
+  ?b (prop:powered+) ?c .
+  ?c prop:powered ?n .
+  
+  ?n prop:title ?tt .
+  ?c prop:title ?cc 
+}

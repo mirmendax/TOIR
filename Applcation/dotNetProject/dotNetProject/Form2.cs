@@ -28,7 +28,7 @@ namespace dotNetProject
 
             SparqlParameterizedString sql = Predicat.Prefix();
 
-            sql.CommandText = "SELECT ?s ?p ?o ?k WHERE { ?a prop:type type:o . ?a prop:title ?s . ?a prop:color ?t . ?t prop:title ?p . ?a prop:place ?d . ?d prop:title ?o . OPTIONAL { ?a prop:control ?f . ?f prop:title ?k }} ORDER BY ?k ";
+            sql.CommandText = "SELECT ?s ?p ?o ?k ?rr WHERE { ?a prop:type type:o . ?a prop:title ?s . ?a prop:color ?t . ?t prop:title ?p . ?a prop:place ?d . ?d prop:title ?o . OPTIONAL { ?a prop:control ?f . ?f prop:title ?k } OPTIONAL {?a prop:powered ?ss . ?ss prop:title ?rr} } ORDER BY ?k ";
             //sql.CommandText = "SELECT DISTINCT ?Concept WHERE {[] a ?Concept}";
             //textBox1.Text = sql.ToString();
 //
@@ -44,7 +44,8 @@ namespace dotNetProject
                 String data2 = "";
                 String data3 = "";
                 String data4 = "";
-                
+                String data5 = "";
+
                 if (item.TryGetValue("s", out n))
                 {
                     if (n != null)
@@ -135,8 +136,31 @@ namespace dotNetProject
                         }
                 }
                 else { data4 = string.Empty; }
-                rr.Add(data+" имеет цвет: "+data2+" находится в "+data3);
+                if (item.TryGetValue("rr", out n))
+                {
+                    if (n != null)
+                        switch (n.NodeType)
+                        {
+                            case NodeType.Blank:
+                                data5 = ((IBlankNode)n).InternalID;
+                                break;
+                            case NodeType.GraphLiteral:
+                                data5 = ((ILiteralNode)n).Value;
+                                break;
+                            case NodeType.Literal:
+                                data5 = ((ILiteralNode)n).Value;
+                                break;
+                            case NodeType.Uri:
+                                data5 = ((IUriNode)n).Uri.AbsoluteUri;
+                                break;
+                            default:
+                                break;
+                        }
+                }
+                else { data4 = string.Empty; }
+                rr.Add(data+" имеет цвет: "+data2+" находится в цеху "+data3);
                 if (data4 != string.Empty) rr.Add("управляет " +data4);
+                if (data5 != string.Empty) rr.Add("питается от " + data5);
             }
             textBox2.Lines = rr.ToArray();
             textBox1.Text = sparql.ToString();
@@ -166,7 +190,8 @@ namespace dotNetProject
                 sql.CommandText += @"; prop:place <" + Predicat.GetManufactoryUri(textBox4.Text)+">";
             if (label10.Text == "OK!")
                 sql.CommandText += @"; prop:control <"+Predicat.GetOUri(textBox6.Text)+">";
-            
+            if (label12.Text == "OK!")
+                sql.CommandText += @"; prop:powered <"+Predicat.GetOUri(textBox12.Text)+">";
 
             sql.CommandText += " } ";
             //sql.CommandText += " prop:title '"+textBox8.Text+"' }";
@@ -245,25 +270,17 @@ namespace dotNetProject
         /// <param name="e"></param>
         private void button6_Click(object sender, EventArgs e)
         {
-            SparqlParameterizedString sql = Predicat.Prefix();
+            
+            string sql = "SELECT ?c WHERE { ?a prop:type type:color . ?a prop:title ?c }";
 
-            sql.CommandText = "SELECT ?c WHERE { ?a prop:type type:color . ?a prop:title ?c }";
+            List<Dictionary<string, object>> result = Predicat.SQuery(sql);
 
-            SparqlQueryParser query = new SparqlQueryParser();
-            SparqlQuery sparql = query.ParseFromString(sql);
-
-            SparqlRemoteEndpoint ep = new SparqlRemoteEndpoint(Predicat.URI_End_Point_QUERY);
-            SparqlResultSet result = ep.QueryWithResultSet(sparql.ToString());
             List<string> list = new List<string>();
             foreach (var item in result)
             {
-                INode n;
-                if (item.TryGetValue("c", out n))
+                foreach (var r in item)
                 {
-                    if (n != null)
-                    {
-                        list.Add(((ILiteralNode)n).Value);
-                    }
+                    if (r.Key == "c") list.Add(r.Value.ToString());
                 }
             }
             textBox2.Lines = list.ToArray();
@@ -275,15 +292,10 @@ namespace dotNetProject
         /// <param name="e"></param>
         private void button7_Click(object sender, EventArgs e)
         {
-            SparqlParameterizedString sql = Predicat.Prefix();
-            sql.CommandText = "ASK { ?a prop:type type:manufactory . ?a prop:title '" + textBox4.Text + "' }";
-            SparqlQueryParser query = new SparqlQueryParser();
-            SparqlQuery sparql = query.ParseFromString(sql);
 
-            SparqlRemoteEndpoint ep = new SparqlRemoteEndpoint(Predicat.URI_End_Point_QUERY);
-            SparqlResultSet result = ep.QueryWithResultSet(sparql.ToString());
-
-            if (result.Result)
+            string sql = "ASK { ?a prop:type type:manufactory . ?a prop:title '" + textBox4.Text + "' }";
+            bool result = Predicat.SAsk(sql);
+            if (result)
             {
                 label8.Text = "OK!";
             }
@@ -297,15 +309,10 @@ namespace dotNetProject
         /// <param name="e"></param>
         private void button8_Click(object sender, EventArgs e)
         {
-            SparqlParameterizedString sql = Predicat.Prefix();
-            sql.CommandText = "ASK { ?a prop:type type:color . ?a prop:title '" + textBox5.Text + "' }";
-            SparqlQueryParser query = new SparqlQueryParser();
-            SparqlQuery sparql = query.ParseFromString(sql);
-
-            SparqlRemoteEndpoint ep = new SparqlRemoteEndpoint(Predicat.URI_End_Point_QUERY);
-            SparqlResultSet result = ep.QueryWithResultSet(sparql.ToString());
-
-            if (result.Result)
+            
+            string sql = "ASK { ?a prop:type type:color . ?a prop:title '" + textBox5.Text + "' }";
+            bool result = Predicat.SAsk(sql);
+            if (result)
             {
                 label9.Text = "OK!";
             }
@@ -347,15 +354,11 @@ namespace dotNetProject
         /// <param name="e"></param>
         private void button9_Click(object sender, EventArgs e)
         {
-            SparqlParameterizedString sql = Predicat.Prefix();
-            sql.CommandText = "ASK { ?a prop:type type:o . ?a prop:title '" + textBox6.Text + "' }";
-            SparqlQueryParser query = new SparqlQueryParser();
-            SparqlQuery sparql = query.ParseFromString(sql);
+            
+            string sql = "ASK { ?a prop:type type:o . ?a prop:title '" + textBox6.Text + "' }";
+            bool result = Predicat.SAsk(sql);
 
-            SparqlRemoteEndpoint ep = new SparqlRemoteEndpoint(Predicat.URI_End_Point_QUERY);
-            SparqlResultSet result = ep.QueryWithResultSet(sparql.ToString());
-
-            if (result.Result)
+            if (result)
             {
                 label10.Text = "OK!";
             }
@@ -364,8 +367,8 @@ namespace dotNetProject
 
         private void button11_Click(object sender, EventArgs e)
         {
-            
-            List<Dictionary<string, object>> result = Predicat.SQuery("SELECT ?title ?f ?color ?place ?control ?size WHERE { ?f prop:type type:o . ?f prop:title ?title FILTER regex(?title, '" + textBox10.Text + "', 'i') . ?f prop:color ?l . ?l prop:title ?color  . ?f prop:place ?d . ?d prop:title ?place OPTIONAL {?f prop:control ?g . ?g prop:title ?control } OPTIONAL { ?f prop:size ?size } }");
+
+            List<Dictionary<string, object>> result = Predicat.SQuery("SELECT ?title ?f ?color ?place ?control ?powered WHERE { ?f prop:type type:o . ?f prop:title ?title FILTER regex(?title, '" + textBox10.Text + "', 'i') . ?f prop:color ?l . ?l prop:title ?color  . ?f prop:place ?d . ?d prop:title ?place OPTIONAL {?f prop:control ?g . ?g prop:title ?control } OPTIONAL { ?f prop:powered ?pp . ?pp prop:title ?powered } }");
 
             if (result.Count != 0)
             {
@@ -377,6 +380,7 @@ namespace dotNetProject
                         if ((item.Key == "place") && (item.Value != null)) textBox4.Text = item.Value.ToString();
                         if ((item.Key == "color") && (item.Value != null)) textBox5.Text = item.Value.ToString();
                         if ((item.Key == "control") && (item.Value != null)) textBox6.Text = item.Value.ToString();
+                        if ((item.Key == "powered") && (item.Value != null)) textBox6.Text = item.Value.ToString();
                         
                     }
                 }
@@ -388,7 +392,7 @@ namespace dotNetProject
                         foreach (var dic in item)
                         {
                             if ((dic.Key == "title") && (dic.Value != null)) str.Add(dic.Value.ToString());
-                            if ((dic.Key == "f") && (dic.Value != null)) str.Add(dic.Value.ToString());
+                            if ((dic.Key == "powered") && (dic.Value != null)) str.Add(dic.Value.ToString());
                         }
                     }
                     textBox2.Lines = str.ToArray();
@@ -421,6 +425,19 @@ namespace dotNetProject
                 r.Add(str);
             }
             textBox2.Lines = r.ToArray();
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+
+            string sql = "ASK { ?a prop:type type:o . ?a prop:title '" + textBox12.Text + "' }";
+            bool result = Predicat.SAsk(sql);
+
+            if (result)
+            {
+                label12.Text = "OK!";
+            }
+            else label12.Text = "null";
         }
     }
 }

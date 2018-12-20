@@ -58,16 +58,16 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.button13 = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textBox12 = new System.Windows.Forms.TextBox();
             this.button11 = new System.Windows.Forms.Button();
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.button12 = new System.Windows.Forms.Button();
             this.textBox11 = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.button13 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -371,6 +371,41 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Оборудование";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(329, 175);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(23, 13);
+            this.label12.TabIndex = 29;
+            this.label12.Text = "null";
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(248, 171);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(75, 20);
+            this.button13.TabIndex = 28;
+            this.button13.Text = "Check";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 174);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(69, 13);
+            this.label11.TabIndex = 26;
+            this.label11.Text = "Питается от";
+            // 
+            // textBox12
+            // 
+            this.textBox12.Location = new System.Drawing.Point(96, 171);
+            this.textBox12.Name = "textBox12";
+            this.textBox12.Size = new System.Drawing.Size(146, 20);
+            this.textBox12.TabIndex = 27;
+            // 
             // button11
             // 
             this.button11.Location = new System.Drawing.Point(193, 19);
@@ -428,40 +463,6 @@
             this.groupBox5.TabIndex = 33;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Текст запроса";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 174);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(43, 13);
-            this.label11.TabIndex = 26;
-            this.label11.Text = "Питает";
-            // 
-            // textBox12
-            // 
-            this.textBox12.Location = new System.Drawing.Point(96, 171);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(146, 20);
-            this.textBox12.TabIndex = 27;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(329, 175);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(23, 13);
-            this.label12.TabIndex = 29;
-            this.label12.Text = "null";
-            // 
-            // button13
-            // 
-            this.button13.Location = new System.Drawing.Point(248, 171);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(75, 20);
-            this.button13.TabIndex = 28;
-            this.button13.Text = "Check";
-            this.button13.UseVisualStyleBackColor = true;
             // 
             // Form2
             // 
