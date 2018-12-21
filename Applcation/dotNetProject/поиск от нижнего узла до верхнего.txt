@@ -7,11 +7,15 @@ prefix manufactory: <http://localhost/manufactory#>
 prefix o:     <http://localhost/oborudovanie#> 
 
 SELECT ?title ?cc ?tt WHERE { 
+  # Получаем идентификатор искомого оборудования
   ?b prop:type type:o .
-  ?b prop:title ?title FILTER (?title = "ШУМН1") .
+  ?b prop:title ?title FILTER (?title = "ШВ") .
+  # Проверяем в цикле все свзяки по свойству (powered)
   ?b (prop:powered+) ?c .
-  ?c prop:powered ?n .
+  # Выодим название объектов полученных после цикла
+  ?c prop:title ?cc .
+  # Выводим название цеха расположения объектов
+  ?c prop:place ?ss .
+  ?ss prop:title ?tt
   
-  ?n prop:title ?tt .
-  ?c prop:title ?cc 
 }

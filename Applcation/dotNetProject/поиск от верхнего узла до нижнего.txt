@@ -1,23 +1,31 @@
-prefix :      <http://localhost/> 
+
+#prefix :      <http://localhost/> 
 prefix color: <http://localhost/color#> 
 prefix prop:  <http://localhost/property#> 
-prefix type:  <http://localhost/type#> 
+prefix type:  <http://localhost/type#>
 prefix manufactory: <http://localhost/manufactory#> 
 prefix o:     <http://localhost/oborudovanie#> 
 
 SELECT ?ot ?kyda ?control ?place ?color WHERE { 
- 
-  ?a prop:title "ШРП32" .
+ # Получение идентификатора начального узла
+  ?a prop:title "ШР2" .
+  #Полуение объектов стоящих ниже в иерархии
   ?b prop:powered+ ?a .
   ?b prop:title ?kyda .
+  # Получение объектов стоящих выше по иерархии для (Откуда -> Куда)  
   ?b prop:powered ?t .
   ?t prop:title ?ot .
+  # Вывод названия цехарасоположения объектов
   ?t prop:place ?rr .
   ?rr prop:title ?place .
+  # Вывод оборудования которым управляют найденые объекты
   OPTIONAL {
   ?b prop:control ?dd .
     ?dd prop:title ?control } .
-  # По цеху
+  
+  #####Фильтры####
+  
+  # По цеху 
  # { ?y prop:type type:manufactory . 
  #   ?y prop:title "Механический". 
  #  ?b prop:place ?y .

@@ -91,7 +91,7 @@ o:shumn2  prop:color  color:belyy ;
 
 o:pr2   prop:color    color:siniy ;
         prop:place    manufactory:mekhanicheskiy ;
-        prop:powered  o:shr2 ;
+        prop:powered  o:shr2 , o:pr1 ;
         prop:title    "ПР2" ;
         prop:type     type:o .
 
@@ -114,6 +114,43 @@ o:shuv  prop:color    color:siniy ;
         prop:title    "ШУВ" ;
         prop:type     type:o .
 
+color:siniy  prop:title  "Синий" ;
+        prop:type   type:color .
+
+color:belyy  prop:title  "Белый" ;
+        prop:type   type:color .
+
+o:nososnyy_agregat_1  prop:color  color:chernyy ;
+        prop:place  manufactory:pervichnogo_proizvodstva ;
+        prop:title  "Нососный агрегат 1" ;
+        prop:type   type:o .
+
+o:kontroller_nizhnego_urovnya
+        prop:color  color:belyy ;
+        prop:place  manufactory:pervichnogo_proizvodstva ;
+        prop:title  "Контроллер Нижнего Уровня" ;
+        prop:type   type:o .
+
+o:maslo_nasos_1  prop:color  color:zheltyy ;
+        prop:place  manufactory:mekhanicheskiy ;
+        prop:title  "Маслонасос 1" ;
+        prop:type   type:o .
+
+o:maslo_nasos_1-1  prop:color  color:zheltyy ;
+        prop:place  manufactory:mekhanicheskiy ;
+        prop:title  "Маслонасос 1-1" ;
+        prop:type   type:o .
+
+o:maslo_nasos_2  prop:color  color:zheltyy ;
+        prop:place  manufactory:mekhanicheskiy ;
+        prop:title  "Маслонасос 2" ;
+        prop:type   type:o .
+
+o:nososnyy_agregat_2  prop:color  color:chernyy ;
+        prop:place  manufactory:mekhanicheskiy ;
+        prop:title  "Нососный агрегат 2" ;
+        prop:type   type:o .
+
 o:shumn3  prop:color  color:belyy ;
         prop:control  o:maslo_nasos_3 ;
         prop:place    manufactory:mekhanicheskiy ;
@@ -121,10 +158,18 @@ o:shumn3  prop:color  color:belyy ;
         prop:title    "ШУМН3" ;
         prop:type     type:o .
 
+o:maslo_nasos_3  prop:color  color:zheltyy ;
+        prop:place  manufactory:mekhanicheskiy ;
+        prop:title  "Маслонасос 3" ;
+        prop:type   type:o .
+
 o:ventilyator_1  prop:color  color:chernyy ;
         prop:place  manufactory:mekhanicheskiy ;
         prop:title  "Вентилятор 1" ;
         prop:type   type:o .
+
+color:chernyy  prop:title  "Черный" ;
+        prop:type   type:color .
 
 o:shchs  prop:color   color:siniy ;
         prop:place    manufactory:mekhanicheskiy ;
@@ -149,51 +194,6 @@ o:shbp  prop:color    color:chernyy ;
         prop:powered  o:shrp32 ;
         prop:title    "ШБП" ;
         prop:type     type:o .
-
-color:belyy  prop:title  "Белый" ;
-        prop:type   type:color .
-
-color:siniy  prop:title  "Синий" ;
-        prop:type   type:color .
-
-color:chernyy  prop:title  "Черный" ;
-        prop:type   type:color .
-
-o:nososnyy_agregat_1  prop:color  color:chernyy ;
-        prop:place  manufactory:pervichnogo_proizvodstva ;
-        prop:title  "Нососный агрегат 1" ;
-        prop:type   type:o .
-
-o:nososnyy_agregat_2  prop:color  color:chernyy ;
-        prop:place  manufactory:mekhanicheskiy ;
-        prop:title  "Нососный агрегат 2" ;
-        prop:type   type:o .
-
-o:kontroller_nizhnego_urovnya
-        prop:color  color:belyy ;
-        prop:place  manufactory:pervichnogo_proizvodstva ;
-        prop:title  "Контроллер Нижнего Уровня" ;
-        prop:type   type:o .
-
-o:maslo_nasos_1  prop:color  color:zheltyy ;
-        prop:place  manufactory:mekhanicheskiy ;
-        prop:title  "Маслонасос 1" ;
-        prop:type   type:o .
-
-o:maslo_nasos_1-1  prop:color  color:zheltyy ;
-        prop:place  manufactory:mekhanicheskiy ;
-        prop:title  "Маслонасос 1-1" ;
-        prop:type   type:o .
-
-o:maslo_nasos_2  prop:color  color:zheltyy ;
-        prop:place  manufactory:mekhanicheskiy ;
-        prop:title  "Маслонасос 2" ;
-        prop:type   type:o .
-
-o:maslo_nasos_3  prop:color  color:zheltyy ;
-        prop:place  manufactory:mekhanicheskiy ;
-        prop:title  "Маслонасос 3" ;
-        prop:type   type:o .
 
 o:shv   prop:color    color:belyy ;
         prop:control  o:ventilyator_1 ;
