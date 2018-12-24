@@ -1,0 +1,37 @@
+#prefix :      <http://localhost/> 
+prefix color: <http://localhost/color#> 
+prefix prop:  <http://localhost/property#> 
+prefix type:  <http://localhost/type#>
+prefix manufactory: <http://localhost/manufactory#> 
+prefix o:     <http://localhost/oborudovanie#> 
+
+SELECT ?оборудование ?Цех ?ПитаетсяОт ?Питает ?находится ?управляет WHERE { 
+  #Идентификатор цеха.
+  ?b prop:type type:manufactory .
+  ?b prop:title ?pla FILTER (?pla = "Первичного производства") .
+  # Интификаторы объектов этого цеха
+  ?cc prop:place ?b .
+  ?cc prop:title ?оборудование .
+  #Идентификаторы по свойству питается (powered)
+  ?cc prop:powered ?df .
+  # Фильтруем по связям с другими цехами
+  ?df prop:place ?pl FILTER (?pl != ?b) .
+  # Вывод списка оборудования в других цехах
+  ?df prop:title ?ПитаетсяОт .
+  # Название цеха 
+  ?df prop:place ?gg .
+  ?gg prop:title ?Цех .
+  #Дополнительно проверяем обратные связи (что питается из искомого цеха)
+  OPTIONAL {
+   ?aa prop:powered ?cc .
+    ?aa prop:place ?pr FILTER ( ?pr != ?b) .
+    ?aa prop:title ?Питает .
+    ?pr prop:title ?находится
+  }
+  OPTIONAL {
+    ?a prop:control ?as .
+    ?as prop:place ?ppll FILTER (?ppll != ?b) .
+    ?a prop:place ?b .
+    ?as prop:title ?управляет .
+  }
+}

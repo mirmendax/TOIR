@@ -1,0 +1,41 @@
+#prefix :      <http://localhost/> 
+prefix color: <http://localhost/color#> 
+prefix prop:  <http://localhost/property#> 
+prefix type:  <http://localhost/type#>
+prefix manufactory: <http://localhost/manufactory#> 
+prefix o:     <http://localhost/oborudovanie#> 
+
+SELECT ?оборудование ?Цех ?ПитаетсяОт ?Питает ?находится ?управляет ?управляетсяОт  WHERE { 
+  #Идентификатор цеха.
+  ?b prop:type type:manufactory .
+  ?b prop:title ?pla FILTER (?pla = "Механический") .
+  # Интификаторы объектов этого цеха
+  ?cc prop:place ?b .
+  ?cc prop:title ?оборудование .
+  OPTIONAL {
+   ?cc prop:control ?upr .
+   ?upr prop:title ?управляет .
+   ?upr prop:place ?pp FILTER (?pp != ?b)
+    ?pp prop:title ?находится
+  }
+  OPTIONAL {
+   ?cc prop:powered ?po .
+    ?po prop:title ?ПитаетсяОт .
+    ?po prop:place ?popl FILTER(?popl != ?b)
+    ?popl prop:title ?Цех
+  }
+  OPTIONAL {
+    ?power prop:powered ?cc .
+    ?power prop:title ?Питает .
+    ?power prop:place ?powerplace FILTER (?powerplace != ?b) . 
+    ?powerplace prop:title ?находится
+  }
+  OPTIONAL {
+    ?ss prop:control ?cc .
+    ?ss prop:title ?управляетсяОт .
+    ?ss prop:place ?ssplace FILTER(?ssplace != ?b)
+  }
+  FILTER NOT EXISTS {
+    ?cc prop:control ?sad 
+  }
+}
