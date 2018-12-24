@@ -46,6 +46,18 @@ o:shcho  prop:color   color:belyy ;
         prop:title    "ŸŒ" ;
         prop:type     type:o .
 
+o:shcho1  prop:color  color:siniy ;
+        prop:place    manufactory:sklad ;
+        prop:powered  o:shcho ;
+        prop:title    "ŸŒ1" ;
+        prop:type     type:o .
+
+o:shcho2  prop:color  color:siniy ;
+        prop:place    manufactory:sklad ;
+        prop:powered  o:shcho ;
+        prop:title    "ŸŒ2" ;
+        prop:type     type:o .
+
 o:pr1   prop:color    color:siniy ;
         prop:place    manufactory:pervichnogo_proizvodstva ;
         prop:powered  o:shr2 ;
@@ -91,7 +103,7 @@ o:shumn2  prop:color  color:belyy ;
 
 o:pr2   prop:color    color:siniy ;
         prop:place    manufactory:mekhanicheskiy ;
-        prop:powered  o:shr2 , o:pr1 ;
+        prop:powered  o:shr2 ;
         prop:title    "œ–2" ;
         prop:type     type:o .
 
@@ -200,4 +212,22 @@ o:shv   prop:color    color:belyy ;
         prop:place    manufactory:mekhanicheskiy ;
         prop:powered  o:shrp32 ;
         prop:title    "ÿ¬" ;
+        prop:type     type:o .
+
+o:shchao  prop:color  color:siniy ;
+        prop:place    manufactory:sklad ;
+        prop:powered  o:pr1 ;
+        prop:title    "Ÿ¿Œ" ;
+        prop:type     type:o .
+
+o:vakuumnyy_nasos_1  prop:color  color:belyy ;
+        prop:place  manufactory:mekhanicheskiy ;
+        prop:title  "¬‡ÍÛÛÏÌ˚È Ì‡ÒÓÒ 1" ;
+        prop:type   type:o .
+
+o:shuvn  prop:color   color:belyy ;
+        prop:control  o:vakuumnyy_nasos_1 ;
+        prop:place    manufactory:pervichnogo_proizvodstva ;
+        prop:powered  o:pr1 ;
+        prop:title    "ÿ”¬Õ" ;
         prop:type     type:o .

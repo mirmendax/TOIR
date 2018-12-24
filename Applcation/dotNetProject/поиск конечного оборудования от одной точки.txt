@@ -1,0 +1,20 @@
+
+#prefix :      <http://localhost/> 
+prefix color: <http://localhost/color#> 
+prefix prop:  <http://localhost/property#> 
+prefix type:  <http://localhost/type#>
+prefix manufactory: <http://localhost/manufactory#> 
+prefix o:     <http://localhost/oborudovanie#> 
+
+SELECT ?оборудование WHERE { 
+  ?a prop:type type:o .
+  ?a prop:title "ПР1" .
+  { 
+    ?b prop:powered+ ?a .
+    ?b prop:control ?o .
+    ?o prop:title ?оборудование}
+  UNION {
+    ?a prop:control ?o .
+    ?o prop:title ?оборудование
+  }
+}
