@@ -18,5 +18,5 @@
 
 :tdb_dataset_readwrite
         a             tdb:DatasetTDB ;
-#        tdb:location  "D:\\TOIR\\TOIR\\apache-jena-fuseki-3.9.0\\run/databases/newdate" .
+#       tdb:location  "D:\\TOIR\\TOIR\\apache-jena-fuseki-3.9.0\\run/databases/newdate" .
 	 tdb:location  "C:\\Work\\TOIR\\apache-jena-fuseki-3.9.0\\run/databases/newdate" .
