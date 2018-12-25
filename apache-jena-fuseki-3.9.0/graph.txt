@@ -208,7 +208,7 @@ o:shbp  prop:color    color:chernyy ;
         prop:type     type:o .
 
 o:shv   prop:color    color:belyy ;
-        prop:control  o:ventilyator_1 ;
+        prop:control  o:ventilyator_1 , o:shuz ;
         prop:place    manufactory:mekhanicheskiy ;
         prop:powered  o:shrp32 ;
         prop:title    "ШВ" ;
@@ -230,4 +230,24 @@ o:shuvn  prop:color   color:belyy ;
         prop:place    manufactory:pervichnogo_proizvodstva ;
         prop:powered  o:pr1 ;
         prop:title    "ШУВН" ;
+        prop:type     type:o .
+
+color:zelenyy  prop:title  "Зеленый" ;
+        prop:type   type:color .
+
+o:zadvizhka_1  prop:color  color:zelenyy ;
+        prop:place  manufactory:novyy ;
+        prop:title  "Задвижка 1" ;
+        prop:type   type:o .
+
+o:zadvizhka_2  prop:color  color:zelenyy ;
+        prop:place  manufactory:novyy ;
+        prop:title  "Задвижка 2" ;
+        prop:type   type:o .
+
+o:shuz  prop:color    color:belyy ;
+        prop:control  o:zadvizhka_1 , o:zadvizhka_2 ;
+        prop:place    manufactory:novyy ;
+        prop:powered  o:shv ;
+        prop:title    "ШУЗ" ;
         prop:type     type:o .
