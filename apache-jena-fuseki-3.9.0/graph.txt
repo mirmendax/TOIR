@@ -8,6 +8,9 @@
 manufactory:novyy  prop:title  "Новый" ;
         prop:type   type:manufactory .
 
+color:krasnyy  prop:title  "Красный" ;
+        prop:type   type:color .
+
 manufactory:pervichnogo_proizvodstva
         prop:title  "Первичного производства" ;
         prop:type   type:manufactory .
@@ -81,11 +84,12 @@ o:shknu3  prop:color  color:belyy ;
 color:zheltyy  prop:title  "Желтый" ;
         prop:type   type:color .
 
-o:shmn1  prop:color   color:siniy ;
-        prop:place    manufactory:mekhanicheskiy ;
-        prop:powered  o:pr1 ;
-        prop:title    "ШМН1" ;
-        prop:type     type:o .
+o:shmn1  prop:DCpowered  o:shchrppt ;
+        prop:color      color:siniy ;
+        prop:place      manufactory:mekhanicheskiy ;
+        prop:powered    o:pr1 ;
+        prop:title      "ШМН1" ;
+        prop:type       type:o .
 
 o:shumn1  prop:color  color:belyy ;
         prop:control  o:maslo_nasos_1 , o:maslo_nasos_1-1 ;
@@ -214,23 +218,25 @@ o:shv   prop:color    color:belyy ;
         prop:title    "ШВ" ;
         prop:type     type:o .
 
-o:shchao  prop:color  color:siniy ;
-        prop:place    manufactory:sklad ;
-        prop:powered  o:pr1 ;
-        prop:title    "ЩАО" ;
-        prop:type     type:o .
+o:shchao  prop:DCpowered  o:shchrppt ;
+        prop:color      color:siniy ;
+        prop:place      manufactory:sklad ;
+        prop:powered    o:pr1 ;
+        prop:title      "ЩАО" ;
+        prop:type       type:o .
 
 o:vakuumnyy_nasos_1  prop:color  color:belyy ;
         prop:place  manufactory:mekhanicheskiy ;
         prop:title  "Вакуумный насос 1" ;
         prop:type   type:o .
 
-o:shuvn  prop:color   color:belyy ;
-        prop:control  o:vakuumnyy_nasos_1 ;
-        prop:place    manufactory:pervichnogo_proizvodstva ;
-        prop:powered  o:pr1 ;
-        prop:title    "ШУВН" ;
-        prop:type     type:o .
+o:shuvn  prop:DCpowered  o:shchrppt ;
+        prop:color      color:belyy ;
+        prop:control    o:vakuumnyy_nasos_1 ;
+        prop:place      manufactory:pervichnogo_proizvodstva ;
+        prop:powered    o:pr1 ;
+        prop:title      "ШУВН" ;
+        prop:type       type:o .
 
 color:zelenyy  prop:title  "Зеленый" ;
         prop:type   type:color .
@@ -250,4 +256,39 @@ o:shuz  prop:color    color:belyy ;
         prop:place    manufactory:novyy ;
         prop:powered  o:shv ;
         prop:title    "ШУЗ" ;
+        prop:type     type:o .
+
+manufactory:akkumulyatornaya
+        prop:title  "Аккумуляторная" ;
+        prop:type   type:manufactory .
+
+manufactory:krasnyy  prop:title  "Красный" ;
+        prop:type   type:manufactory .
+
+o:ab1   prop:color  color:krasnyy ;
+        prop:place  manufactory:akkumulyatornaya ;
+        prop:title  "АБ1" ;
+        prop:type   type:o .
+
+o:ab2   prop:color  color:krasnyy ;
+        prop:place  manufactory:akkumulyatornaya ;
+        prop:title  "АБ2" ;
+        prop:type   type:o .
+
+o:shchpt1  prop:color  color:siniy ;
+        prop:place    manufactory:akkumulyatornaya ;
+        prop:powered  o:ab1 ;
+        prop:title    "ЩПТ1" ;
+        prop:type     type:o .
+
+o:shchpt2  prop:color  color:siniy ;
+        prop:place    manufactory:akkumulyatornaya ;
+        prop:powered  o:ab2 ;
+        prop:title    "ЩПТ2" ;
+        prop:type     type:o .
+
+o:shchrppt  prop:color  color:belyy ;
+        prop:place    manufactory:akkumulyatornaya ;
+        prop:powered  o:shr1 , o:shchpt1 , o:shchpt2 ;
+        prop:title    "ЩРППТ" ;
         prop:type     type:o .
