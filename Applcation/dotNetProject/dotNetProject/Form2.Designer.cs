@@ -68,6 +68,10 @@
             this.button12 = new System.Windows.Forms.Button();
             this.textBox11 = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.button14 = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.textBox7 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -344,6 +348,10 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.button14);
+            this.groupBox3.Controls.Add(this.label13);
+            this.groupBox3.Controls.Add(this.textBox7);
             this.groupBox3.Controls.Add(this.label12);
             this.groupBox3.Controls.Add(this.button13);
             this.groupBox3.Controls.Add(this.label11);
@@ -464,6 +472,41 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Текст запроса";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(329, 200);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(23, 13);
+            this.label5.TabIndex = 33;
+            this.label5.Text = "null";
+            // 
+            // button14
+            // 
+            this.button14.Location = new System.Drawing.Point(248, 196);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(75, 20);
+            this.button14.TabIndex = 32;
+            this.button14.Text = "Check";
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 199);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(89, 13);
+            this.label13.TabIndex = 30;
+            this.label13.Text = "Доп. питание от";
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(96, 196);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(146, 20);
+            this.textBox7.TabIndex = 31;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -537,5 +580,9 @@
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox textBox7;
     }
 }

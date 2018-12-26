@@ -192,6 +192,8 @@ namespace dotNetProject
                 sql.CommandText += @"; prop:control <"+Predicat.GetOUri(textBox6.Text)+">";
             if (label12.Text == "OK!")
                 sql.CommandText += @"; prop:powered <"+Predicat.GetOUri(textBox12.Text)+">";
+            if (label5.Text == "OK!")
+                sql.CommandText += @"; prop:DCpowered <" + Predicat.GetOUri(textBox7.Text) + ">";
 
             sql.CommandText += " } ";
             //sql.CommandText += " prop:title '"+textBox8.Text+"' }";
@@ -438,6 +440,18 @@ namespace dotNetProject
                 label12.Text = "OK!";
             }
             else label12.Text = "null";
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            string sql = "ASK { ?a prop:type type:o . ?a prop:title '" + textBox7.Text + "' }";
+            bool result = Predicat.SAsk(sql);
+
+            if (result)
+            {
+                label5.Text = "OK!";
+            }
+            else label5.Text = "null";
         }
     }
 }

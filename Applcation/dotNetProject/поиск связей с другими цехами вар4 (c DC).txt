@@ -1,0 +1,68 @@
+
+#prefix :      <http://localhost/> 
+prefix color: <http://localhost/color#> 
+prefix prop:  <http://localhost/property#> 
+prefix type:  <http://localhost/type#>
+prefix manufactory: <http://localhost/manufactory#> 
+prefix o:     <http://localhost/oborudovanie#> 
+
+SELECT ?оборудование ?питает ?питаетDC ?питаетс€ ?питаетс€ќтDC ?управл€ет ?управл€етс€ ?цех WHERE { 
+   ?place prop:type type:manufactory .
+  ?place prop:title ?bb FILTER (?bb = "јккумул€торна€")
+  
+  {
+    ?a prop:type type:o .
+    ?a prop:place ?place .
+    ?a prop:title ?оборудование .
+    ?a prop:powered ?bd .
+    ?bd prop:place ?bbplace FILTER (?bbplace != ?place) .
+    ?bbplace prop:title ?цех .
+    ?bd prop:title ?питаетс€
+  } 
+  UNION  {
+    ?a prop:type type:o .
+    ?a prop:place ?place .
+    ?a prop:title ?оборудование .
+    ?a prop:DCpowered ?bd .
+    ?bd prop:place ?bbplace FILTER (?bbplace != ?place) .
+    ?bbplace prop:title ?цех .
+    ?bd prop:title ?питаетс€ќтDC
+  } 
+  UNION {
+    ?a prop:type type:o .
+    ?a prop:place ?place .
+    ?a prop:title ?оборудование .
+    ?bd prop:powered ?a .
+    ?bd prop:place ?bdplace FILTER (?bdplace != ?place )
+    ?bdplace prop:title ?цех .
+    ?bd prop:title ?питает
+  } 
+  UNION {
+    ?a prop:type type:o .
+    ?a prop:place ?place .
+    ?a prop:title ?оборудование .
+    ?bd prop:DCpowered ?a .
+    ?bd prop:place ?bdplace FILTER (?bdplace != ?place )
+    ?bdplace prop:title ?цех .
+    ?bd prop:title ?питаетDC
+  } 
+  UNION {
+    ?a prop:type type:o .
+    ?a prop:place ?place .
+    ?a prop:title ?оборудование .
+    ?a prop:control ?bd .
+    ?bd prop:place ?bdplace FILTER (?bdplace != ?place)
+    ?bd prop:title ?управл€ет .
+    ?bdplace prop:title ?цех
+  } 
+  UNION {
+    ?a prop:type type:o .
+    ?a prop:place ?place .
+    ?a prop:title ?оборудование .
+    ?bd prop:control ?a .
+    ?bd prop:place ?bdplace FILTER (?bdplace != ?place)
+    ?bdplace prop:title ?цех .
+    ?bd prop:title ?управл€етс€ .
+
+  }
+}
